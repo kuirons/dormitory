@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="main" extends="struts-default,json-default">
+        <action name="GoLogin" class="com.action.GoLogin">
+            <result name="success">AdminHomepage.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+        <action name="Message" class="com.action.Message" method="myAjaxAction">
+            <result type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+        <action name="GetMigrateList" class="com.action.GetMigrateList" method="getMigrateList">
+            <result type="json"></result>
+        </action>
+        <action name="GetAnnouncement" class="com.action.GetAnnouncementList" method="getAnnouncementList">
+            <result type="json"></result>
+        </action>
+        <action name="GetManagerInfo" class="com.action.GetManagerInfo" method="getManagerInfo">
+            <result type="json"></result>
+        </action>
+        <action name="GetAllAnnouncementList" class="com.action.GetAllAnnouncementList" method="getAllAnnouncementList">
+            <result type="json"></result>
+        </action>
+        <action name="GetAllManagerList" class="com.action.GetAllManagerList" method="getAllManagerList">
+            <result type="json"></result>
+        </action>
+        <action name="SearchManagerList" class="com.action.SearchManagerList" method="searchManagerList">
+            <result type="json"></result>
+        </action>
+        <action name="AddManager" class="com.action.AddManager" method="addManager">
+        </action>
+        <action name="ChangeManager" class="com.action.ChangeManager" method="changeManager">
+        </action>
+        <action name="ParamTransitChangeManager" class="com.action.ParamTransitChangeManager">
+        </action>
+        <action name="DeleteManager" class="com.action.DeleteManager">
+        </action>
+        <action name="GetAllStuInfoList" class="com.action.GetAllStuInfoList">
+            <result type="json"></result>
+        </action>
+        <action name="SearchStudentList" class="com.action.SearchStudentList" method="searchManagerList">
+            <result type="json"></result>
+        </action>
+        <action name="AddStudent" class="com.action.AddStudent" method="addStudent">
+        </action>
+        <action name="DeleteStudent" class="com.action.DeleteStudent">
+        </action>
+        <action name="ParamTransitChangeStudent" class="com.action.ParamTransitChangeStudent">
+        </action>
+        <action name="ChangeStudent" class="com.action.ChangeStudent" method="changeStudent">
+        </action>
+        <action name="GetAllRoomList" class="com.action.GetAllRoomList">
+            <result type="json"></result>
+        </action>
+        <action name="SearchRoomList" class="com.action.SearchRoomList" method="searchRoomList">
+            <result type="json"/>
+        </action>
+        <action name="AddRoom" class="com.action.AddRoom" method="addRoom">
+        </action>
+        <action name="ParamTransitChangeBuilding" class="com.action.ParamTransitChangeBuilding">
+        </action>
+        <action name="ChangeRoom" class="com.action.ChangeRoom" method="changeRoom"></action>
+        <action name="DeleteRoom" class="com.action.DeleteRoom"></action>
+        <action name="GetAllRequest" class="com.action.GetAllRequest">
+            <result type="json"></result>
+        </action>
+        <action name="AgreeIn" class="com.action.AgreeIn">
+            <result type="json"></result>
+        </action>
+        <action name="DisAgreeIn" class="com.action.DisAgreeIn"></action>
+        <action name="ParamTransitDisagree" class="com.action.ParamTransitDisagree"></action>
+        <action name="AgreeOut" class="com.action.AgreeOut"></action>
+        <action name="GetAllLackOfRoomList" class="com.action.GetAllLackOfRoomList">
+            <result type="json"></result>
+        </action>
+        <action name="SearchLackOfRoomList" class="com.action.SearchLackOfRoomList" method="searchLackOfRoomList">
+            <result type="json"></result>
+        </action>
+        <action name="AddLackOfRoom" class="com.action.AddLackOfRoom"></action>
+        <action name="DeleteLackOfRoom" class="com.action.DeleteLackOfRoom"></action>
+        <action name="AddAnnouncement" class="com.action.AddAnnouncement"></action>
+    </package>
+</struts>
