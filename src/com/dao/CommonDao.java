@@ -314,4 +314,30 @@ public class CommonDao {
         CommonDao test=new CommonDao();
         System.out.print(test.getManagerInfo("管理员").getM_Informatrion());
     }
+
+    public void changeMangerInformation(ManagerBean ma) {
+        Statement stat=null;
+        ResultSet rs=null;
+        Connection conn=new DBHelper().getConn();
+        String sql="update T_Manager set M_Phonenum='"+ma.getM_Phonenum()+"',M_Information='"+ma.getM_Informatrion()+"' where M_Name='"+ma.getM_Name()+"'";
+        try{
+            stat=conn.createStatement();
+            stat.executeUpdate(sql);
+        }catch (SQLException ex){
+        }finally {
+            try {
+                if(rs!=null){
+                    rs.close();
+                }
+                if(stat!=null){
+                    stat.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

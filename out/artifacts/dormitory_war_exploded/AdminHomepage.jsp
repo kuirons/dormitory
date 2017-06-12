@@ -201,6 +201,9 @@
                 })
             })
         })
+        $('#changepassword').click(function () {
+            $('#main').load("ChangePassword.jsp")
+        })
     })
 </script>
 <body>
@@ -228,8 +231,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/administrator.jpg" class="img-circle" alt="Avatar"> <span><%=((UserBean)session.getAttribute("userinfo")).getUsername().toString() %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
-                            <li><a href="#"><i class="lnr lnr-exit"></i> <span>注销登录</span></a></li>
+                            <li><a href="javascript:void(0)" id="changepassword"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
+                            <li><a href="javascript:void(0)" id="logout"><i class="lnr lnr-exit"></i> <span>注销登录</span></a></li>
                         </ul>
                     </li>
                     <!-- <li>

@@ -85,5 +85,6 @@
         <action name="AddLackOfRoom" class="com.action.AddLackOfRoom"></action>
         <action name="DeleteLackOfRoom" class="com.action.DeleteLackOfRoom"></action>
         <action name="AddAnnouncement" class="com.action.AddAnnouncement"></action>
+        <action name="ChangeManagerInformation" class="com.action.ChangeManagerInformation"></action>
     </package>
 </struts>

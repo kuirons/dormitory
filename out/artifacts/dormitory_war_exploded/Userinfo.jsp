@@ -111,7 +111,7 @@
                 $.ajax({
                     type:"post",
                     url:"GetAllAnnouncementList.action",
-                    datatyoe:"json",
+                    datatype:"json",
                     success:function (data) {
                         var json=JSON.parse(data)
                         for(var i=0;i<json.length;i++){
@@ -123,6 +123,9 @@
                     }
                 })
             })
+        })
+        $('#changemanagerinformation').click(function () {
+            $('#main').load("ChangeManagerInformation.jsp")
         })
     })
 </script>
@@ -157,7 +160,7 @@
                         <div class="profile-info" id="aboutinfo">
                             <h4 class="heading">简介</h4>
                         </div>
-                        <div class="text-center"><a href="#" class="btn btn-primary">修改信息</a></div>
+                        <div class="text-center"><a href="javascript:void(0)" class="btn btn-primary" id="changemanagerinformation">修改信息</a></div>
                     </div>
                     <!-- END PROFILE DETAIL -->
                 </div>
