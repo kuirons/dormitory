@@ -51,6 +51,7 @@ public class GoLogin {
 
     public String execute() throws Exception {
         if (null == new UserDao().CheckLogin(username, password, usertype)) {
+            System.out.println("获取用户信息失败");
             setMsg("登陆失败，用户名或密码错误");
             return "error";
         } else {

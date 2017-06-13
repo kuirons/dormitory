@@ -86,5 +86,9 @@
         <action name="DeleteLackOfRoom" class="com.action.DeleteLackOfRoom"></action>
         <action name="AddAnnouncement" class="com.action.AddAnnouncement"></action>
         <action name="ChangeManagerInformation" class="com.action.ChangeManagerInformation"></action>
+        <action name="ChangePassword" class="com.action.ChangePassword">
+            <result type="json"></result>
+        </action>
+        <action name="Logout" class="com.action.Logout"></action>
     </package>
 </struts>

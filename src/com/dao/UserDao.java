@@ -9,6 +9,7 @@ import com.bean.UserBean;
 public class UserDao {
     //验证登陆
     public UserBean CheckLogin(String username, String password, String usertype) {
+        boolean isExistThisUser=false;
         UserBean userinfo=new UserBean();
         Statement stat = null;
         ResultSet rs = null;
@@ -18,6 +19,7 @@ public class UserDao {
             stat = conn.createStatement();
             rs = stat.executeQuery(sql);
             while (rs.next()) {
+                isExistThisUser=true;
                 userinfo.setUserid(rs.getString("L_Id"));
                 userinfo.setPassword(rs.getString("L_Password"));
                 userinfo.setUsername(rs.getString("L_Name"));
@@ -39,7 +41,12 @@ public class UserDao {
                 e.printStackTrace();
             }
         }
-        return userinfo;
+        if(isExistThisUser){
+            return userinfo;
+        }
+        else{
+            return null;
+        }
     }
 
     public static void main(String[] args) {

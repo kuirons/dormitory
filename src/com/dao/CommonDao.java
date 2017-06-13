@@ -1,6 +1,8 @@
 package com.dao;
 import com.bean.*;
 import com.db.DBHelper;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -339,5 +341,70 @@ public class CommonDao {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean changeManagerPassword(String oldpassword, String newpassword, String username) {
+        Boolean result=false;
+        if (judgePasswordIsRight(oldpassword, username)) {
+            result=true;
+            Statement stat=null;
+            ResultSet rs=null;
+            Connection conn= new DBHelper().getConn();
+            String sql="update T_Login set L_Password='"+newpassword+"' where L_Name='"+username+"'";
+            try {
+                stat = conn.createStatement();
+                stat.executeUpdate(sql);
+            } catch (SQLException ex) {
+
+            }finally {
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                    if (stat != null) {
+                        stat.close();
+                    }
+                    if (rs != null) {
+                        rs.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean judgePasswordIsRight(String oldpassword, String username) {
+        boolean result=false;
+        Statement stat=null;
+        ResultSet rs=null;
+        Connection conn=new DBHelper().getConn();
+        String sql="select * from T_Login where L_Name='"+username+"'";
+        try {
+            stat = conn.createStatement();
+            rs = stat.executeQuery(sql);
+            while (rs.next()){
+                if (oldpassword.equals(rs.getString("L_Password"))) {
+                    result=true;
+                }
+            }
+        } catch (SQLException ex) {
+        }finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (stat != null) {
+                    stat.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 }

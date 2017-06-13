@@ -21,7 +21,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>
 
+<script src="Script/jquery-3.2.1.js"></script>
+<script>
+    $('#changepasswordsubmit').click(function () {
+        $.ajax({
+            type: "post",
+            data: $("#changepasswordform").serialize(),
+            url: "ChangePassword.action",
+            success: function (data) {
+                alert(data)
+                if (data==="修改成功，请重新登陆") {
+                    $.ajax({
+                        type: "post",
+                        url: "Logout.action",
+                        success: function (date) {
+                            window.location.href = "login.jsp"
+                        }
+                    })
+                }
+            },
+            error: function () {
+                alert("修改密码失败")
+            }
+        })
+    })
+</script>
 <body>
-This is my JSP page. <br>
+<div class="main-content">
+    <div class="container-fluid">
+        <div style="width: 50%;position: relative;left: 25%;">
+            <form id="changepasswordform">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">请输入相关信息</h3>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" placeholder="旧密码..." name="oldpassword">
+                        <br>
+                        <input type="password" class="form-control" placeholder="新密码..." name="newpassword">
+                        <br>
+                        <input type="password" class="form-control" placeholder="重复新密码..." name="repeatnewpassword">
+                        <br>
+                        <input type="button" class="btn btn-primary" value="提交" id="changepasswordsubmit"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>
