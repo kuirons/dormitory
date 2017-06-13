@@ -20,7 +20,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>
-
+<script src="Script/jquery-3.2.1.js"></script>
+<script>
+    function reply(value) {
+        $.ajax({
+            type:"post",
+            data:{to:$(value).closest('tr').find('td').find('a')[0].innerHTML},
+            url:"ParamTransitReplyMessage.action",
+            datatype:null,
+            success:function (data2) {
+                $('#main').load("ReplyMessage.jsp")
+            },
+            error:function () {
+                alert("页面初始化失败")
+            }
+        })
+    }
+</script>
 <body>
 <div class="main-content">
     <div class="container-fluid">
@@ -37,15 +53,13 @@
                             <table class="table project-table">
                                 <thead>
                                 <tr>
-                                    <th>请求来自于</th>
-                                    <th>学号</th>
-                                    <th>理由</th>
-                                    <th>楼宇</th>
-                                    <th>处理状态</th>
+                                    <th>消息来自于</th>
+                                    <th>主题</th>
+                                    <th>内容</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
-                                <tbody id="showinrequest">
+                                <tbody id="showallmessage">
                                 </tbody>
                             </table>
                         </div>

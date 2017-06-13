@@ -56,7 +56,22 @@
         })
     }
     function seeAllThemMessage() {
-        $('#main').load("ShowAllMessage.jsp")
+        $('#main').load("ShowAllMessage.jsp",function () {
+            $.ajax({
+                type:"post",
+                url:"getThisUserAllMessage.action",
+                datatype:"json",
+                success:function (data2) {
+                    var json=JSON.parse(data2)
+                    for(var i=0;i<json.length;i++){
+                        $('#showallmessage').append('<tr> <td><img src="assets/img/user' + parseInt(json[i]["M_Id"]) % 8 + '.jpg" alt="Avatar" class="avatar img-circle"> <a href="#">' + json[i]["M_From"] + '</a></td> <td><p>' + json[i]["M_Theme"] + '</p></td> <td><p>' + json[i]["M_Content"] + '</p></td><td><button type="button" style="height: 27px" class="btn btn-success btn-xs" onclick="reply(this)">' + "回复" + '</button> </td></tr>')
+                    }
+                },
+                error:function () {
+                    alert("获取消息失败")
+                }
+            })
+        })
     }
     //从数据库中获取全部学生的信息，绑定到相应表格中
     $(document).ready(function () {

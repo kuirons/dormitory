@@ -90,5 +90,10 @@
             <result type="json"></result>
         </action>
         <action name="Logout" class="com.action.Logout"></action>
+        <action name="getThisUserAllMessage" class="com.action.getThisUserAllMessage">
+            <result type="json"></result>
+        </action>
+        <action name="ReplyMessage" class="com.action.ReplyMessage"></action>
+        <action name="ParamTransitReplyMessage" class="com.action.ParamTransitReplyMessage"></action>
     </package>
 </struts>

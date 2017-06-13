@@ -42,15 +42,19 @@
         })
         <!--获取请求-->
         $.ajax({
-            type:"post",
-            url:"GetMigrateList.action",
-            datatype:"json",
-            success:function (dat) {
-                var json = JSON.parse(dat);
-                $('#forhomepageinfo').append('<div class="col-md-4 stat-item" id="forbeg">'+json.length+'<span>待处理请求</span> </div>');
-            },
-            error:function () {
-                alert("页面初始化失败")
+            type: "post",
+            url: "GetAllRequest.action",
+            datatype: "json",
+            success: function (data) {
+                var count=0
+                var json = JSON.parse(data)
+                for (var i = 0; i < json.length; i++) {
+                    if(json[i]["R_Status"]==='未处理'){
+                        count++
+                    }
+                }
+                $('#forhomepageinfo').append('<div class="col-md-4 stat-item" id="forbeg">'+count+'<span>待处理请求</span> </div>');
+
             }
         })
         <!--获取该用户发送的公告-->
