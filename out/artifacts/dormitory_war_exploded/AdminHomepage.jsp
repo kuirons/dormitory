@@ -204,6 +204,15 @@
         $('#changepassword').click(function () {
             $('#main').load("ChangePassword.jsp")
         })
+        $('#logout').click(function () {
+            $.ajax({
+                type:"post",
+                url:"Logout.action",
+                success: function (date) {
+                    window.location.href = "login.jsp"
+                }
+            })
+        })
     })
 </script>
 <body>
