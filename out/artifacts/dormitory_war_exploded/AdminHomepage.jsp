@@ -55,6 +55,9 @@
             }
         })
     }
+    function seeAllThemMessage() {
+        $('#main').load("ShowAllMessage.jsp")
+    }
     //从数据库中获取全部学生的信息，绑定到相应表格中
     $(document).ready(function () {
         $('#main').load("Userinfo.jsp")
@@ -81,7 +84,7 @@
                         $('#messagecontent').append('<li><a href="#" class="notification-item"><span class="dot bg-success"></span>'+json[i]["M_Content"]+'</a></li>')
                     }
                 }
-                $('#messagecontent').append('<li><a href="#" class="more">查看全部信息</a></li>')
+                $('#messagecontent').append('<li><a href="javascript:void(0)" class="more" onclick="seeAllThemMessage()">查看全部信息</a></li>')
             },
             error:function () {
                 alert("页面初始化失败")
