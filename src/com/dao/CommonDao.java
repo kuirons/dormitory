@@ -257,7 +257,32 @@ public class CommonDao {
             }
         }
     }
-
+    //为新增管理员分配密码
+    public void giveANewPasswordToNewManager(ManagerBean m){
+        Statement stat=null;
+        ResultSet rs=null;
+        Connection conn=new DBHelper().getConn();
+        String sql="insert into T_Login(L_Name,L_Password,L_Usertype) values('"+m.getM_Name()+"','123456789','宿舍管理员')";
+        try{
+            stat=conn.createStatement();
+            stat.executeUpdate(sql);
+        }catch (SQLException ex){
+        }finally {
+            try {
+                if(rs!=null){
+                    rs.close();
+                }
+                if(stat!=null){
+                    stat.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
     //修改
     public void changeManager(ManagerBean m,String username){
         Statement stat=null;

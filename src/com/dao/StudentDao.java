@@ -260,4 +260,30 @@ public class StudentDao {
         StudentDao test=new StudentDao();
         test.deleteStudent("test");
     }
+
+    public void giveNewStudentANewPassword(StudentBean s) {
+        Statement stat=null;
+        ResultSet rs=null;
+        Connection conn=new DBHelper().getConn();
+        String sql="insert into T_Login(L_Name,L_Password,L_Usertype) values('"+s.getS_Name()+"','"+s.getS_Id()+"','学生')";
+        try{
+            stat=conn.createStatement();
+            stat.executeUpdate(sql);
+        }catch (SQLException ex){
+        }finally {
+            try {
+                if(rs!=null){
+                    rs.close();
+                }
+                if(stat!=null){
+                    stat.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

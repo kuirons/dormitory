@@ -66,5 +66,7 @@ public class AddManager {
         m.setM_Informatrion(information);
         m.setM_Building(building);
         new CommonDao().addManager(m);
+        //给新增的宿舍管理员分配默认的密码123456789
+        new CommonDao().giveANewPasswordToNewManager(m);
     }
 }

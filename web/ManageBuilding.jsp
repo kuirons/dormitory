@@ -107,7 +107,18 @@
 //            })
         })
         $('#addroom').click(function () {
+            <%
+           if("系统管理员".equals(((UserBean)session.getAttribute("userinfo")).getUsertype())){
+           %>
             $('#main').load("AddRoom.jsp")
+            <%
+            }
+            else{
+                %>
+            $('#main').load("MAddRoom.jsp")
+            <%
+        }
+        %>
         })
     })
 </script>

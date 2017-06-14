@@ -1,11 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 2017/6/4
-  Time: 19:37
+  Date: 2017/6/13
+  Time: 22:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page import="com.bean.UserBean" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -65,12 +66,7 @@
                         <br>
                         <select class="form-control" name="building">
                             <option value="">请选择...</option>
-                            <option value="1栋">1栋</option>
-                            <option value="2栋">2栋</option>
-                            <option value="3栋">3栋</option>
-                            <option value="4栋">4栋</option>
-                            <option value="5栋">5栋</option>
-                            <option value="6栋">6栋</option>
+                            <option value=<%=session.getAttribute("thebuildingforselectvalue") %>><%=session.getAttribute("thebuildingforselectvalue")%></option>
                         </select>
                         <br>
                         <input type="text" class="form-control" placeholder="寝室号..." name="room"></textarea>

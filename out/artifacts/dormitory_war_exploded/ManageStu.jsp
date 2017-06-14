@@ -108,7 +108,18 @@
             })
         })
         $('#addstudent').click( function() {
+            <%
+            if("系统管理员".equals(((UserBean)session.getAttribute("userinfo")).getUsertype())){
+            %>
             $('#main').load("AddStudent.jsp")
+            <%
+            }
+            else{
+                %>
+            $('#main').load("MAddStudent.jsp")
+            <%
+        }
+        %>
         })
     })
 </script>

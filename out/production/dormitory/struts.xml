@@ -7,7 +7,9 @@
 <struts>
     <package name="main" extends="struts-default,json-default">
         <action name="GoLogin" class="com.action.GoLogin">
-            <result name="success">AdminHomepage.jsp</result>
+            <result name="adminhomepage">AdminHomepage.jsp</result>
+            <result name="houseparenthomepage">HouseParentHomePage.jsp</result>
+            <result name="studenthomepage">StudentHomePage.jsp</result>
             <result name="error">login.jsp</result>
         </action>
         <action name="Message" class="com.action.Message" method="myAjaxAction">

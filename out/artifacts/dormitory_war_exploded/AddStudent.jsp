@@ -29,7 +29,7 @@
                         success:function (data) {
                             var json=JSON.parse(data)
                             for(var i=0;i<json.length;i++){
-                                $('#showstuinfo').append('<tr><td>'+json[i]["S_Name"]+'</td><td>'+json[i]["S_Id"]+'</td><td>'+json[i]["S_Phonenum"]+'</td><td>'+(typeof(json[i]["S_Building"])=="undefined"?"":json[i]["S_Building"])+'-'+(typeof(json[i]["S_Room"])=="undefined"?"":json[i]["S_Building"])+'</td><td><button type="button" class="btn btn-warning btn-xs"  onClick="changestudent(this)">'+"修改"+'</button>&nbsp;<button type="button" class="btn btn-danger btn-xs" onclick="deletestudent(this)">'+"删除"+' </td></tr>')
+                                $('#showstuinfo').append('<tr><td>'+json[i]["S_Name"]+'</td><td>'+json[i]["S_Id"]+'</td><td>'+json[i]["S_Phonenum"]+'</td><td>'+(typeof(json[i]["S_Building"])=="undefined"?"":json[i]["S_Building"])+'-'+(typeof(json[i]["S_Room"])=="undefined"?"":json[i]["S_Room"])+'</td><td><button type="button" class="btn btn-warning btn-xs"  onClick="changestudent(this)">'+"修改"+'</button>&nbsp;<button type="button" class="btn btn-danger btn-xs" onclick="deletestudent(this)">'+"删除"+' </td></tr>')
                             }
 
                         },

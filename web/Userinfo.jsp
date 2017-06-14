@@ -133,6 +133,16 @@
         })
     })
 </script>
+<%! String image=null;%>
+<%
+    String usertype=((UserBean)session.getAttribute("userinfo")).getUsertype();
+    if("系统管理员".equals(usertype))
+        image="assets/img/administrator.jpg";
+    else if("宿舍管理员".equals(usertype))
+        image="assets/img/houseparent.jpg";
+    else
+        image="assets/img/student.jpg";
+%>
 <body>
 <div class="main-content">
     <div class="container-fluid">
@@ -144,7 +154,7 @@
                     <div class="profile-header">
                         <div class="overlay"></div>
                         <div class="profile-main">
-                            <img src="assets/img/administrator.jpg" class="img-circle" alt="Avatar" style="width: 200px;height: 200px">
+                            <img src=<%=image %> class="img-circle" alt="Avatar" style="width: 200px;height: 200px">
                             <h3 class="name"><%=((UserBean)session.getAttribute("userinfo")).getUsername().toString()%></h3>
                             <span class="online-status status-available">在线</span>
                         </div>

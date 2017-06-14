@@ -1,6 +1,7 @@
 package com.action;
 
 import com.bean.UserBean;
+import com.dao.CommonDao;
 import com.dao.UserDao;
 import org.apache.struts2.ServletActionContext;
 
@@ -57,7 +58,15 @@ public class GoLogin {
             HttpSession session = ServletActionContext.getRequest().getSession();
             UserBean userinfo=new UserDao().CheckLogin(username,password,usertype);
             session.setAttribute("userinfo",userinfo);
-            return "success";
+            if ("系统管理员".equals(usertype)) {
+                return "adminhomepage";
+            } else if ("宿舍管理员".equals(usertype)) {
+                session.setAttribute("thebuildingforselectvalue",(new CommonDao().getManagerInfo(username)).getM_Building());
+                return "houseparenthomepage";
+            }
+            else{
+                return "studenthomepage";
+            }
         }
     }
 }

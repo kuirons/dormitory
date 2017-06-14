@@ -89,7 +89,7 @@
                         <form class="form-auth-small" action="GoLogin.action" method="post">
                             <div class="form-group">
                                 <label for="username" class="control-label sr-only">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" autofocus placeholder="请输入用户名..." pattern="^[\u4e00-\u9fa5A-Za-z0-9]{3,12}$" required="required">
+                                <input type="text" class="form-control" id="username" name="username" autofocus placeholder="请输入用户名..." pattern="^[\u4e00-\u9fa5A-Za-z0-9]{2,12}$" required="required">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label sr-only">Password</label>
