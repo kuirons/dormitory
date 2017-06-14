@@ -304,7 +304,6 @@ public class StudentDao {
                 stu.setS_Phonenum(resultSet.getString("S_Phonenum"));
                 stu.setS_Room(resultSet.getString("S_Room"));
                 stu.setS_Information(resultSet.getString("S_Information"));
-                System.out.println(resultSet.getString("S_Name"));
                 list.add(stu);
             }
         }catch (SQLException ex){
@@ -325,5 +324,31 @@ public class StudentDao {
             }
         }
         return list;
+    }
+
+    public void changeStudentRoomInfo(StudentBean student) {
+        Statement stat=null;
+        ResultSet rs=null;
+        Connection conn=new DBHelper().getConn();
+        String sql="update T_Student set S_Building='"+student.getS_Building()+"',S_Room='"+student.getS_Room()+"' where S_Id='"+student.getS_Id()+"'";
+        try{
+            stat=conn.createStatement();
+            stat.executeUpdate(sql);
+        }catch (SQLException ex){
+        }finally {
+            try {
+                if(rs!=null){
+                    rs.close();
+                }
+                if(stat!=null){
+                    stat.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 }

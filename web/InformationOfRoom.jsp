@@ -22,14 +22,14 @@
 </head>
 <script src="Script/jquery-3.2.1.js"></script>
 <script>
-    function reply(value) {
+    function sendmessage(value) {
         $.ajax({
             type:"post",
             data:{to:$(value).closest('tr').find('td').find('a')[0].innerHTML},
             url:"ParamTransitReplyMessage.action",
             datatype:null,
             success:function (data2) {
-                $('#main').load("ReplyMessage.jsp")
+                $('#main').load("SendMessage.jsp")
             },
             error:function () {
                 alert("页面初始化失败")

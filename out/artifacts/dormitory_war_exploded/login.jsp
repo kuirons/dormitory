@@ -62,6 +62,9 @@
         }).focus(function () {
             $(this).triggerHandler("blur")
         })
+        $('#forgetpassword').click(function () {
+            alert("前联系管理员，电话：13724629381")
+        })
 //        $('#send').click(function () {
 //            $('.form-auth-small :input').trigger("blur")
 //        })
@@ -107,7 +110,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block" id="send">登录</button>
                             <div class="bottom">
-                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">忘记密码?</a></span>
+                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="javascript:void(0)" id="forgetpassword">忘记密码?</a></span>
                             </div>
                         </form>
                     </div>

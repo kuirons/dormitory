@@ -109,5 +109,6 @@
         <action name="GetStudentInfo" class="com.action.GetStudentInfo" method="getStudentInfo">
             <result type="json"></result>
         </action>
+        <action name="SendTheRequest" class="com.action.SendTheRequest"></action>
     </package>
 </struts>

@@ -128,4 +128,30 @@ public class RequestDao {
             }
         }
     }
+
+    public void addANewRequest(RequestBean r) {
+        Statement stat=null;
+        ResultSet rs=null;
+        Connection conn=new DBHelper().getConn();
+        String sql="insert into T_Request(R_Reason,R_From,R_Type,R_Status,R_Building,R_Room) values('"+r.getR_Reason()+"','"+r.getR_From()+"','"+r.getR_Type()+"','"+r.getR_Status()+"','"+r.getR_Building()+"','"+r.getR_Room()+"')";
+        try{
+            stat=conn.createStatement();
+            stat.executeUpdate(sql);
+        }catch (SQLException ex){
+        }finally {
+            try {
+                if(rs!=null){
+                    rs.close();
+                }
+                if(stat!=null){
+                    stat.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

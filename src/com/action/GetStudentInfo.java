@@ -2,7 +2,6 @@ package com.action;
 
 import com.bean.StudentBean;
 import com.bean.UserBean;
-import com.dao.CommonDao;
 import com.dao.StudentDao;
 import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
@@ -31,7 +30,7 @@ public class GetStudentInfo {
             HttpServletResponse response=ServletActionContext.getResponse();
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out=response.getWriter();
-            stuInfo=new StudentDao().getStudentInfo(((StudentBean)session.getAttribute("userinfo")).getS_Name());
+            stuInfo=new StudentDao().getStudentInfo(((UserBean)session.getAttribute("userinfo")).getUsername());
             JSONObject jso=new JSONObject();
             jso.put("S_Name",stuInfo.getS_Name());
             jso.put("S_Id",stuInfo.getS_Id());

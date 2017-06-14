@@ -46,7 +46,7 @@
                 })
             },
             error:function () {
-                alert("添加学生失败")
+                alert("回复信息失败")
             }
         })
     })

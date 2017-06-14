@@ -124,6 +124,9 @@
                 })
             })
         })
+        $('#sendtherequest').click(function () {
+            $('#main').load("SendTheRequest.jsp")
+        })
         $('#changepassword').click(function () {
             $('#main').load("ChangePassword.jsp")
         })

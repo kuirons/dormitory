@@ -40,7 +40,6 @@ public class AgreeIn {
     }
 
     public void execute() throws Exception{
-        StudentBean student=new StudentDao().getStudentInfoById(id);
         HttpSession session=ServletActionContext.getRequest().getSession();
         //用于通知学生处理结果的message
         //处理参数中的<p>标签
@@ -48,6 +47,7 @@ public class AgreeIn {
         id=id.replace("</p>","");
         buildingandroom=buildingandroom.replaceAll("<p>","");
         buildingandroom=buildingandroom.replaceAll("</p>","");
+        StudentBean student=new StudentDao().getStudentInfoById(id);
         MessageBean message=new MessageBean();
         //放入基本信息
         message.setM_From(((UserBean)session.getAttribute("userinfo")).getUsername());
@@ -69,7 +69,10 @@ public class AgreeIn {
             buildingBean.setB_Takenin(String.valueOf(Integer.parseInt(buildingBean.getB_Takenin())+1));
             buildingBean.setB_Allownum(String.valueOf(Integer.parseInt(buildingBean.getB_Allownum())-1));
             new BuildingDao().inChangeRoomInfo(buildingBean);
-
+            //然后修改学生的信息
+            student.setS_Building(buildingandroom.split("-")[0]);
+            student.setS_Room(buildingandroom.split("-")[1]);
+            new StudentDao().changeStudentRoomInfo(student);
             //返回结果成功
             json.put("message","迁入成功");
             //发送成功消息

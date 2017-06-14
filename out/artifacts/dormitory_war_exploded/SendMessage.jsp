@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 2017/6/13
-  Time: 19:50
+  Date: 2017/6/14
+  Time: 19:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
@@ -28,19 +28,16 @@
             data:$("#replymessageform").serialize(),
             url:"ReplyMessage.action",
             success:function (data2) {
-                $('#main').load("ShowAllMessage.jsp",function () {
+                $('#main').load("InformationOfRoom.jsp",function () {
                     $.ajax({
-                        type:"post",
-                        url:"getThisUserAllMessage.action",
-                        datatype:"json",
-                        success:function (data2) {
-                            var json=JSON.parse(data2)
-                            for(var i=0;i<json.length;i++){
-                                $('#showallmessage').append('<tr> <td><img src="assets/img/user' + parseInt(json[i]["M_Id"]) % 8 + '.jpg" alt="Avatar" class="avatar img-circle"> <a href="#">' + json[i]["M_From"] + '</a></td> <td><p>' + json[i]["M_Theme"] + '</p></td> <td><p>' + json[i]["M_Content"] + '</p></td><td><button type="button" style="height: 27px" class="btn btn-success btn-xs" onclick="reply(this)">' + "回复" + '</button> </td></tr>')
+                        type: "post",
+                        url: "GetTheInformationOfRoomMate.action",
+                        datatype: "json",
+                        success: function (data) {
+                            var json = JSON.parse(data)
+                            for (var i = 0; i < json.length; i++) {
+                                $('#showallroommate').append('<tr> <td><img src="assets/img/user' + Math.floor(Math.random()*9) + '.jpg" alt="Avatar" class="avatar img-circle"> <a href="#">' + json[i]["S_Name"] + '</a></td> <td><p>' + json[i]["S_Phonenum"] + '</p></td> <td><p>' + json[i]["S_Information"] + '</p></td><td><button type="button" style="height: 27px" class="btn btn-success btn-xs" onClick="sendmessage(this)">' + "发送消息" + '</button> </td></tr>')
                             }
-                        },
-                        error:function () {
-                            alert("获取消息失败")
                         }
                     })
                 })
@@ -81,3 +78,4 @@
 </body>
 
 </html>
+
