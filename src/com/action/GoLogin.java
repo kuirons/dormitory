@@ -1,7 +1,9 @@
 package com.action;
 
+import com.bean.StudentBean;
 import com.bean.UserBean;
 import com.dao.CommonDao;
+import com.dao.StudentDao;
 import com.dao.UserDao;
 import org.apache.struts2.ServletActionContext;
 
@@ -65,6 +67,8 @@ public class GoLogin {
                 return "houseparenthomepage";
             }
             else{
+                StudentBean stu=new StudentDao().getStudentInfo(username);
+                session.setAttribute("thestudentinformation",stu.getS_Building()+"-"+stu.getS_Room());
                 return "studenthomepage";
             }
         }

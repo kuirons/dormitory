@@ -286,4 +286,44 @@ public class StudentDao {
             }
         }
     }
+
+    public List<StudentBean> getStuInfoByBuildingAndRoom(String thestudentinformation) {
+        List<StudentBean> list=new ArrayList<StudentBean>();
+        Statement statement=null;
+        ResultSet resultSet=null;
+        Connection connection=new DBHelper().getConn();
+        String sql="select * from T_Student where S_Building='"+thestudentinformation.split("-")[0]+"' and S_Room='"+thestudentinformation.split("-")[1]+"'";
+        try{
+            statement=connection.createStatement();
+            resultSet=statement.executeQuery(sql);
+            while(resultSet.next()){
+                StudentBean stu=new StudentBean();
+                stu.setS_Building(resultSet.getString("S_Building"));
+                stu.setS_Id(resultSet.getString("S_Id"));
+                stu.setS_Name(resultSet.getString("S_Name"));
+                stu.setS_Phonenum(resultSet.getString("S_Phonenum"));
+                stu.setS_Room(resultSet.getString("S_Room"));
+                stu.setS_Information(resultSet.getString("S_Information"));
+                System.out.println(resultSet.getString("S_Name"));
+                list.add(stu);
+            }
+        }catch (SQLException ex){
+
+        }finally {
+            try{
+                if(connection!=null){
+                    connection.close();
+                }
+                if(resultSet!=null){
+                    resultSet.close();
+                }
+                if(statement!=null){
+                    statement.close();
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
 }

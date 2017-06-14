@@ -63,6 +63,46 @@ public class RequestDao {
         return list;
     }
 
+    public List<RequestBean> getTheStudentAllRequest(String name) {
+        List<RequestBean> list=new ArrayList<RequestBean>();
+        Statement statement=null;
+        ResultSet resultSet=null;
+        Connection connection=new DBHelper().getConn();
+        String sql="select * from T_Request where R_From='"+name+"'";
+        try{
+            statement=connection.createStatement();
+            resultSet=statement.executeQuery(sql);
+            while(resultSet.next()){
+                RequestBean re=new RequestBean();
+                re.setR_id(resultSet.getString("R_Id"));
+                re.setR_From(resultSet.getString("R_From"));
+                re.setR_Reason(resultSet.getString("R_Reason"));
+                re.setR_Type(resultSet.getString("R_Type"));
+                re.setR_Status(resultSet.getString("R_Status"));
+                re.setR_Building(resultSet.getString("R_Building"));
+                re.setR_Room(resultSet.getString("R_Room"));
+                list.add(re);
+            }
+        }catch (SQLException ex){
+
+        }finally {
+            try{
+                if(connection!=null){
+                    connection.close();
+                }
+                if(resultSet!=null){
+                    resultSet.close();
+                }
+                if(statement!=null){
+                    statement.close();
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
     public void inChangeThisRequestStatus(String id, String buildingandroom) {
         Statement stat=null;
         ResultSet rs=null;

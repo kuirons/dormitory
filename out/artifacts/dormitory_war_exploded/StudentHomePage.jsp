@@ -75,7 +75,7 @@
     }
     //从数据库中获取全部学生的信息，绑定到相应表格中
     $(document).ready(function () {
-        $('#main').load("Userinfo.jsp")
+        $('#main').load("StuInfo.jsp")
         <!--获取message，该message用于主页面的消息加载，和userinfo页面的信息加载不重复-->
         $.ajax({
             type:"post",
@@ -107,114 +107,19 @@
         })
         //点击主页按钮返回主页
         $('#homepageclick').click(function () {
-            $('#main').load("Userinfo.jsp")
+            $('#main').load("StuInfo.jsp")
         })
-        $('#managehpclick').click(function () {
-            $('#main').load('ManageHP.jsp',function () {
-                bindtotable()
-            })
-        })
-        $('#managestuclick').click(function () {
-            $('#main').load("ManageStu.jsp",function () {
-                $.ajax({
-                    type:"post",
-                    url:"GetAllStuInfoList.action?randow="+Math.random(),
-                    datatyoe:"json",
-                    success:function (data) {
-                        var json=JSON.parse(data)
-                        for(var i=0;i<json.length;i++){
-                            $('#showstuinfo').append('<tr><td>'+json[i]["S_Name"]+'</td><td>'+json[i]["S_Id"]+'</td><td>'+json[i]["S_Phonenum"]+'</td><td>'+(typeof(json[i]["S_Building"])=="undefined"?"":json[i]["S_Building"]+'-')+(typeof(json[i]["S_Room"])=="undefined"?"":json[i]["S_Room"])+'</td><td><button type="button" class="btn btn-warning btn-xs"  onClick="changestudent(this)">'+"修改"+'</button>&nbsp;<button type="button" class="btn btn-danger btn-xs" onclick="deletestudent(this)">'+"删除"+' </td></tr>')
-                        }
-
-                    },
-                    error:function () {
-                        alert("加载学生信息错误")
-                    }
-                })
-
-            })
-        })
-        $('#manageroomclick').click(function () {
-            $('#main').load("ManageBuilding.jsp",function () {
-                $.ajax({
-                    type:"post",
-                    url:"GetAllRoomList.action",
-                    datatype:"json",
-                    success:function (data2) {
-                        var json=JSON.parse(data2)
-                        for(var i=0;i<json.length;i++){
-                            $('#showroominfo').append('<tr><td>'+json[i]["B_Id"]+'-'+json[i]["B_Room"]+'</td><td>'+json[i]["B_Takenin"]+'</td><td>'+json[i]["B_Maxnum"]+'</td><td>'+json[i]["B_Allownum"]+'</td><td><button type="button" class="btn btn-warning btn-xs" onClick="changebuilding(this)">'+"修改"+'</button>&nbsp;<button type="button" class="btn btn-danger btn-xs" onclick="deletebuilding(this)">'+"删除"+' </td></tr>')
-                        }
-                    },
-                    error:function () {
-                        alert("获取寝室信息失败")
-                    }
-                })
-            })
-        })
-        $('#manageinandout').click(function () {
-            $('#main').load("ManageInAndOut.jsp", function () {
+        $('#lookovertheinformationofroom').click(function () {
+            $('#main').load("InformationOfRoom.jsp",function () {
                 $.ajax({
                     type: "post",
-                    url: "GetAllRequest.action",
+                    url: "GetTheInformationOfRoomMate.action",
                     datatype: "json",
                     success: function (data) {
-                        var countin = 0
-                        var countout = 0
                         var json = JSON.parse(data)
                         for (var i = 0; i < json.length; i++) {
-                            if (json[i]["R_Status"] != '已处理') {
-                                if (json[i]["R_Type"] === '迁入') {
-                                    $('#showinrequest').append('<tr> <td><img src="assets/img/user' + parseInt(json[i]["R_Id"]) % 8 + '.jpg" alt="Avatar" class="avatar img-circle"> <a href="#">' + json[i]["R_Name"] + '</a></td> <td><p>' + json[i]["R_From"] + '</p></td> <td><p>' + json[i]["R_Reason"] + '</p></td><td><p>' + json[i]["R_Building"]+'-'+json[i]["R_Room"] + '</p></td> <td><span class="label label-warning">未处理</span></td><td><button type="button" style="height: 27px" class="btn btn-success btn-xs" onClick="agreein(this)">' + "同意" + '</button>&nbsp;<button type="button" style="height: 27px" class="btn btn-danger btn-xs" onclick="disagreein(this)">' + "不同意" + ' </td></tr>')
-                                    countin++
-                                }
-                                else {
-                                    $('#showoutrequest').append('<tr> <td><img src="assets/img/user' + parseInt(json[i]["R_Id"]) % 8 + '.jpg" alt="Avatar" class="avatar img-circle"> <a href="#">' + json[i]["R_Name"] + '</a></td> <td><p>'  + json[i]["R_From"] + '</p></td> <td><p>'+ json[i]["R_Reason"] + '</p></td><td><p>' + json[i]["R_Building"]+'-'+json[i]["R_Room"] + '</p></td> <td><span class="label label-warning">未处理</span></td><td><button type="button" style="height: 27px" class="btn btn-success btn-xs" onClick="agreeout(this)">' + "同意" + '</button>&nbsp;<button type="button" style="height: 27px" class="btn btn-danger btn-xs" onclick="disagreeout(this)">' + "不同意" + ' </td></tr>')
-                                    countout++
-                                }
-                            }
-                            else{
-                                $('#finishrequest').append('<tr> <td><img src="assets/img/user' + parseInt(json[i]["R_Id"]) % 8 + '.jpg" alt="Avatar" class="avatar img-circle"> <a href="#">' + json[i]["R_Name"] + '</a></td> <td><p>' + json[i]["R_From"] + '</p></td> <td><p>' + json[i]["R_Reason"] + '</p></td><td><p>' + json[i]["R_Building"]+'-'+json[i]["R_Room"] + '</p></td> <td><span class="label label-success">已处理</span></td><td><button type="button" style="height: 27px" class="btn btn-success btn-xs">' + "不可操作" + '</button> </td></tr>')
-                            }
+                            $('#showallroommate').append('<tr> <td><img src="assets/img/user' + Math.floor(Math.random()*9) + '.jpg" alt="Avatar" class="avatar img-circle"> <a href="#">' + json[i]["S_Name"] + '</a></td> <td><p>' + json[i]["S_Phonenum"] + '</p></td> <td><p>' + json[i]["S_Information"] + '</p></td><td><button type="button" style="height: 27px" class="btn btn-success btn-xs" onClick="sendmessage(this)">' + "发送消息" + '</button> </td></tr>')
                         }
-                        $('#countin').append(countin)
-                        $('#countout').append(countout)
-                    }
-                })
-            })
-        })
-        $('#managelackofroom').click(function () {
-            $('#main').load("ManageLackOfRoom.jsp",function () {
-                $.ajax({
-                    type:"post",
-                    url:"GetAllLackOfRoomList.action",
-                    datatyoe:"json",
-                    success:function (data) {
-                        var json=JSON.parse(data)
-                        for(var i=0;i<json.length;i++){
-                            $('#showlackofroominfo').append('<tr><td>'+json[i]["L_Name"]+'</td><td>'+json[i]["L_Sid"]+'</td><td>'+json[i]["L_Time"]+'</td><td>'+json[i]["L_Building"]+'-'+json[i]["L_Room"]+'</td><td><button type="button" class="btn btn-danger btn-xs" onclick="deletelackofroom(this)">'+"删除"+' </td></tr>')
-                        }
-                    },
-                    error:function () {
-                        alert("加载缺寝信息错误")
-                    }
-                })
-            })
-        })
-        $('#manageannouncement').click(function () {
-            $('#main').load("ManageAnnouncement.jsp",function () {
-                $.ajax({
-                    type:"post",
-                    url:"GetAllAnnouncementList.action",
-                    datatyoe:"json",
-                    success:function (data) {
-                        var json=JSON.parse(data)
-                        for(var i=0;i<json.length;i++){
-                            $('#showannouncementl').append('<li><i class="fa fa-plus activity-icon"></i> <p>'+json[i]["A_Content"] +'<span class="timestamp">'+json[i]["A_Time"]+'</span></a></li>')
-                        }
-                    },
-                    error:function () {
-                        alert("加载公告信息错误")
                     }
                 })
             })
@@ -256,7 +161,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/administrator.jpg" class="img-circle" alt="Avatar"> <span><%=((UserBean)session.getAttribute("userinfo")).getUsername().toString() %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/student.jpg" class="img-circle" alt="Avatar"> <span><%=((UserBean)session.getAttribute("userinfo")).getUsername().toString() %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0)" id="changepassword"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
                             <li><a href="javascript:void(0)" id="logout"><i class="lnr lnr-exit"></i> <span>注销登录</span></a></li>
@@ -276,12 +181,8 @@
             <nav>
                 <ul class="nav">
                     <li><a href="javascript:void(0)" class="active" id="homepageclick"><i class="lnr lnr-home"></i> <span>主页</span></a></li>
-                    <li><a href="javascript:void(0)" class="" id="managehpclick"><i class="lnr lnr-user"></i> <span>宿舍管理员管理</span></a></li>
-                    <li><a href="javascript:void(0)" class="" id="managestuclick"><i class="lnr lnr-users"></i> <span>学生管理</span></a></li>
-                    <li><a href="javascript:void(0)" class="" id="manageroomclick"><i class="lnr lnr-apartment"></i> <span>楼宇管理</span></a></li>
-                    <li><a href="javascript:void(0)" class="" id="managelackofroom"><i class="lnr lnr-file-add"></i> <span>缺寝登记</span></a></li>
-                    <li><a href="javascript:void(0)" class="" id="manageinandout"><i class="lnr lnr-menu"></i> <span>变动登记</span></a></li>
-                    <li><a href="javascript:void(0)" class="" id="manageannouncement"><i class="lnr lnr-list"></i> <span>公告管理</span></a></li>
+                    <li><a href="javascript:void(0)" class="" id="lookovertheinformationofroom"><i class="lnr lnr-users"></i> <span>查看宿舍信息</span></a></li>
+                    <li><a href="javascript:void(0)" class="" id="sendtherequest"><i class="lnr lnr-envelope"></i> <span>发送变动请求</span></a></li>
                 </ul>
             </nav>
         </div>
